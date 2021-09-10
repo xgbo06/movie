@@ -6,8 +6,6 @@
 
     <v-divider class="mx-4"></v-divider>
 
-    <v-card-title>Tonight's availability</v-card-title>
-
     <v-card-text>
       <v-chip-group
         v-model="selection"
