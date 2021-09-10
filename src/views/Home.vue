@@ -9,8 +9,23 @@
       dense
       v-model="searchQuery"
       @keydown.enter.native="searchMovie"
+      @click:append="searchMovie"
     ></v-text-field>
     <v-row>
+      <template v-if="loading">
+        <v-row class="mt-8">
+          <v-skeleton-loader
+            class="mx-auto"
+            min-width="300px"
+            type="card-avatar, article"
+          ></v-skeleton-loader>
+          <v-skeleton-loader
+            class="mx-auto"
+            min-width="300px"
+            type="card-avatar, article"
+          ></v-skeleton-loader>
+        </v-row>
+      </template>
       <template v-for="(movie, index) in movies">
         <MovieCard :key="index" :details="movie" />
       </template>
@@ -27,21 +42,34 @@ export default {
     MovieCard,
   },
   data: () => ({
+    loading: false,
     searchQuery: "",
     movies: [],
   }),
   methods: {
     searchMovie() {
-      console.log(this.searchQuery);
-      SearchMovie(this.searchQuery).then((r) => {
-        this.movies = r.data.Search;
-      });
+      if (!this.searchQuery) {
+        return;
+      }
+      this.loading = true;
+      SearchMovie(this.searchQuery)
+        .then((r) => {
+          this.movies = r.data.Search;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
   created() {
-    SearchMovie("pirates").then((r) => {
-      this.movies = r.data.Search;
-    });
+    this.loading = true;
+    SearchMovie("pirates")
+      .then((r) => {
+        this.movies = r.data.Search;
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
 };
 </script>

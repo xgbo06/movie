@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="main">
       <div class="app-content-container pa-4 fill-height">
         <slot></slot>
       </div>
@@ -12,4 +12,8 @@
 export default {};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.main {
+  background: gainsboro;
+}
+</style>

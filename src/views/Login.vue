@@ -38,7 +38,12 @@ export default {
   methods: {
     login() {
       let isValid = this.$refs.loginForm.validate();
-      console.log(isValid, process.env);
+      if (isValid) {
+        localStorage.setItem("isLoggin", true);
+        this.$router.push({
+          name: "Home",
+        });
+      }
     },
   },
 };

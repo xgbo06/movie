@@ -8,6 +8,8 @@
 import BasicLayout from "@/layouts/BasicLayout";
 import UserMainLayout from "@/layouts/UserMainLayout";
 
+const loggedInRoutes = ["Home", "Details"];
+
 export default {
   name: "App",
 
@@ -18,14 +20,13 @@ export default {
 
   computed: {
     resolveLayout() {
-      if (this.isLoggedIn) {
+      let routeName = this.$route.name;
+      if (loggedInRoutes.indexOf(routeName) > -1) {
         return UserMainLayout;
       }
       return BasicLayout;
     },
   },
-  data: () => ({
-    isLoggedIn: true,
-  }),
+  data: () => ({}),
 };
 </script>

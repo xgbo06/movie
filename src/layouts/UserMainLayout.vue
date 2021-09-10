@@ -35,24 +35,40 @@
 
 <script>
 export default {
-  data: () => ({
-    menus: [
-      {
-        title: "Profile",
-        icon: "mdi-cog",
-        action: () => {
-          console.log("Profile");
+  data() {
+    return {
+      menus: [
+        {
+          title: "Profile",
+          icon: "mdi-cog",
+          action: () => {
+            console.log("Profile");
+          },
         },
-      },
-      {
-        title: "Logout",
-        icon: "mdi-power",
-        action: () => {
-          console.log("Logout");
+        {
+          title: "Logout",
+          icon: "mdi-power",
+          action: () => {
+            console.log("Logout");
+            this.logout();
+          },
         },
-      },
-    ],
-  }),
+      ],
+    };
+  },
+  methods: {
+    logout() {
+      this.$router.push({
+        name: "Login",
+      });
+    },
+  },
+  created() {
+    let isLoggedIn = localStorage.getItem("isLoggin");
+    if (!isLoggedIn) {
+      this.logout();
+    }
+  },
 };
 </script>
 
