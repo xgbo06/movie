@@ -10,6 +10,6 @@ export const SearchMovie = (query) => {
 
 export const GetMovieDetails = (id) => {
   return axios.get(
-    `http://www.omdbapi.com/?apikey=b76b385c&page=1&type=movie&Content-Type=application/json/&i=${id}`
+    `https://www.omdbapi.com/?apikey=b76b385c&page=1&type=movie&Content-Type=application/json/&i=${id}`
   );
 };
